@@ -17,7 +17,10 @@ add_library(clouds_dsp STATIC
 
 add_library(CloudsDSP::clouds_dsp ALIAS clouds_dsp)
 
-target_compile_features(clouds_dsp PUBLIC cxx_std_17)
+# C++14 is enough for this code and lets consumers build with older compilers
+# such as the Bela board's Clang 3.9. A public C++17 requirement would force
+# every consumer, including C++14 ones, to compile as C++17.
+target_compile_features(clouds_dsp PUBLIC cxx_std_14)
 
 # Repository root: lets consumers include "clouds/..." and "stmlib/..."
 target_include_directories(clouds_dsp PUBLIC
